@@ -7,8 +7,8 @@ Current issues:
 -POST call to /api/genres returns "CANNOT POST /api/genres 
 
 Example:
-Sending GET to localhost:3000/api/genres with no body returns entire genre collection (working as intended)
-Sending GET to localhost:3000/api/genres with {"name":"Horror"} JSON body also returns entire genre collection. Plopped a console.log in the getGenre function and it's not even being called at all.
+-Sending GET to localhost:3000/api/genres with no body returns entire genre collection (working as intended)
+-Sending GET to localhost:3000/api/genres with {"name":"Horror"} JSON body also returns entire genre collection. Plopped a console.log in the getGenre function and it's not even being called at all.
 
 
 I feel like I'm missing something very simple here.
