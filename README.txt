@@ -13,3 +13,4 @@ To be implemented:
 -Rental schema and controllers. Possibly using transactions.
 -Validation using joi
 -Unit testing with Jest
+-production/dev start scripts

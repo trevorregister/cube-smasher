@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         required:[true, 'Role required'],
         enum: {
             values: ['customer', 'admin', 'superAdmin'],
-            message: `role must be 'customer', 'admin', or superAdmin.`
+            message: `role must be 'customer', 'admin', or superAdmin`
         }
     },
 

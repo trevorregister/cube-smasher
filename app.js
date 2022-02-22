@@ -9,7 +9,7 @@ const user_routes = require('./routes/users')
 const logger = require('./middleware/logger')
 
 const app = express()
-mongoose.connect(process.env.LOCAL_DB_URI)
+mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.json())
 app.use('/', logger.log)
