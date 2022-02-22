@@ -12,3 +12,4 @@ To be implemented:
 -Role-based authorization using JWT
 -Rental schema and controllers. Possibly using transactions.
 -Validation using joi
+-Unit testing with Jest
