@@ -4,9 +4,16 @@ const Schema = mongoose.Schema
 const GenreSchema = new Schema({
     name: {
         type: String,
-        required: [true, 'Genre name required.'],
-        unique: [true, 'Genre already exists']
+        required: true,
+        unique: true
     },
+
+    slug: {
+        type: String,
+        required: true,
+        unique: true
+    },
+
     createdAt: {
         type: Date
     }
