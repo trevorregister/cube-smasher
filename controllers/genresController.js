@@ -1,5 +1,5 @@
 const Genre = require('../models/genre')
-const slguify = require('slugify')
+const slugify = require('slugify')
 
 
 
@@ -42,8 +42,8 @@ exports.getGenreById = async function (req,res){
 exports.createGenre = async function (req,res){
     try {
         var genre = await Genre.findOne({"name":req.body.name})
-        if(genre) return res.status(400).send('Genre already exists')
 
+        if(genre) return res.status(400).send('Genre already exists')
         var genre = new Genre({
             name: req.body.name,
             slug: slugify(req.body.name.toLowerCase()),
@@ -51,13 +51,11 @@ exports.createGenre = async function (req,res){
         })
 
         await genre.save()
+        return res.status(201).send(`Genre with name ${genre.name} created.`)
     }
     catch (error){
         return error
-    }
-
-
-    return res.status(201).send(`Genre with name ${genre.name} created.`)
+    } 
 
 }
 
