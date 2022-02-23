@@ -63,15 +63,18 @@ exports.updateGenre = async function (req,res){
     var name = req.params.name
     var newName = req.body.newName
 
+
     try {
         var genre = await Genre.findOne({"name":name})
-        if(!genre){
-            return res.status(400).send('Genre does not exist')
-        }
+        if(!genre) return res.status(400).send(` ${name} does not exist`)
+
+        var newNameCheck = await Genre.findOne({"name":newName})
+        if (newNameCheck) return res.status(403).send(`${newName} already exists`)
 
         genre.name = newName
+        genre.slug = slugify(newName.toLowerCase())
         await genre.save()
-        res.status(201).send('Name update successful')
+        return res.status(201).send(`${name} changed to ${newName}`)
     }
     catch(error){
         return error
