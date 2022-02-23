@@ -1,10 +1,14 @@
 const User = require('../models/user')
+const bcrypt = require('bcryptjs')
 
-exports.createUser = async function (req,res){
-    
+const saltRounds = 10
+
+exports.registerUser = async function (req,res){
     try {
         var user = await User.findOne({"email":req.body.email.toLowerCase()})
         if (user) return res.status(400).send(`User with ${req.body.email} aleady exists`)
+
+        const hash = await bcrypt.hash(req.body.password, saltRounds)
 
         var user = new User({
             firstName: req.body.firstName,
@@ -12,8 +16,8 @@ exports.createUser = async function (req,res){
             email: req.body.email,
             rentals: [],
             accountStatus: "active",
-            role: "superAdmin",
-            hash: 'hash',
+            role: req.body.role,
+            hash: hash,
             createdAt: Date.now(),
             updatedAt: Date.now()
         })
@@ -21,6 +25,22 @@ exports.createUser = async function (req,res){
         await user.save()
         return res.status(201).send('User successfully created')
     }
+    catch (error){
+        return error
+    }
+}
+
+exports.login = async function (req, res){
+    try {
+        const user = await User.findOne({"email":req.body.email.toLowerCase()})
+        if(user){
+            const compare = await bcrypt.compare(req.body.password, user.hash)
+            
+            if(compare) return res.status(200).send('Login successful') //for authorization, remove return and next() to auth route instead
+            else return res.status(401).send('Email or password incorrect')
+        }
+    }
+
     catch (error){
         return error
     }
