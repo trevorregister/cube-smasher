@@ -36,7 +36,7 @@ exports.login = async function (req, res){
         if(user){
             const compare = await bcrypt.compare(req.body.password, user.hash)
             
-            if(compare) return res.status(200).send('Login successful') //for authorization, remove return and next() to auth route instead
+            if(compare) return res.status(200).send('Login successful') //for authorization, remove return and add next() to auth route instead
             else return res.status(401).send('Email or password incorrect')
         }
     }
