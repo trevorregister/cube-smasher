@@ -13,9 +13,9 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.json())
 app.use('/', logger.log)
-app.use('/api', genres_routes)
-app.use('/api', movies_routes)
-app.use('/api', user_routes)
+app.use('/api/genres', genres_routes)
+app.use('/api/movies', movies_routes)
+app.use('/api/users', user_routes)
 //app.use('/register', register_routes)
 //app.use('/login', login_routes)
 

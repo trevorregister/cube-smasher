@@ -18,7 +18,8 @@ const MovieSchema = new Schema({
     },
 
     genres: [{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Genre'
     }],
 
     history: {

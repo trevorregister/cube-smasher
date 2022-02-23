@@ -40,7 +40,7 @@ exports.createMovie = async function (req,res){
     try {
         var movie = await Movie.findOne({"name":req.body.name})
         
-        if(movie) return res.status(400).send(`Movie with name ${req.body.name} already exists`)
+        if(movie) return res.status(400).send(`Movie already exists`)
 
         var movie = new Movie({
             name: req.body.name,
