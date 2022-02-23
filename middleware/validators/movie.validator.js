@@ -16,6 +16,7 @@ exports.createMovie = function (req, res, next){
         .greater(1878)
         .integer()
         .less(new Date().getFullYear()+1)
+        .required()
 
     })
 
