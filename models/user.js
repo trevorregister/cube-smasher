@@ -24,7 +24,11 @@ const UserSchema = new Schema({
 
     accountStatus:{
         type:String,
-        required:[true, 'accountStatus required']
+        required:[true, 'accountStatus required'],
+        enum: {
+            values: ['active', 'suspended'],
+            message: [`accountStatus must be 'active' or 'suspended`]
+        }
     },
 
     role:{
