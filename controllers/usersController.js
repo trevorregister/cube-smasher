@@ -33,12 +33,12 @@ exports.registerUser = async function (req,res){
 exports.login = async function (req, res){
     try {
         const user = await User.findOne({"email":req.body.email.toLowerCase()})
-        if(user){
-            const compare = await bcrypt.compare(req.body.password, user.hash)
-            
-            if(compare) return res.status(200).send('Login successful') //for authorization, remove return and add next() to auth route instead
-            else return res.status(401).send('Email or password incorrect')
+
+        if(user && await bcrypt.compare(req.body.password, user.hash)){
+            return res.status(200).send('Login successful') //for authorization, remove return and add next() to auth route instead 
         }
+        
+        else return res.status(401).send('Email or password incorrect')
     }
 
     catch (error){
