@@ -5,10 +5,10 @@ Currently implemented:
 -Genre schema and controllers
 -Movie schema and controllers
 -simple GET, POST, PATCH endpoints for each.
+-Authentication using bcrypt 
 
 
 To be implemented:
--Authentication using bcrypt
 -Role-based authorization using JWT
 -Rental schema and controllers. Possibly using transactions.
 -Validation using joi
