@@ -10,7 +10,7 @@ const MovieSchema = new Schema({
     slug:{
         type: String,
         required: [true, 'Slug required.'],
-        unique: [true]
+        unique: true
     },
 
     createdAt: {
@@ -31,7 +31,11 @@ const MovieSchema = new Schema({
     },
 
     status: {
-        type: String
+        type: String,
+        enum: {
+            values: ['in', 'out'],
+            message: [`status must be 'in' or 'out'`]
+        }
     }
 })
 
