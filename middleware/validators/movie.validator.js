@@ -2,7 +2,6 @@ const Joi = require('joi')
 const express = require('express')
 const router = express.Router()
 
-
 exports.createMovie = function (req, res, next){ 
     const JoiSchema = Joi.object({
     
@@ -27,8 +26,6 @@ exports.createMovie = function (req, res, next){
 
     else req.body = value
     next()
-
-
 }
 
 exports.updateMovie = function (req, res, next){ 
@@ -53,8 +50,6 @@ exports.updateMovie = function (req, res, next){
 
     else req.body = value
     next()
-
-
 }
 
 
