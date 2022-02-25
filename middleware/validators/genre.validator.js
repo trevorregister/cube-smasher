@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const express = require('express')
 
 exports.createGenre = function (req, res, next){ 
     const JoiSchema = Joi.object({
