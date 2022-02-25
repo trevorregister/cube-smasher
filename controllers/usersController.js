@@ -1,7 +1,11 @@
 const User = require('../models/user')
+const Movie = require('../models/movie')
 const bcrypt = require('bcryptjs')
 
 const saltRounds = 10
+const dailyRate = 5
+const rentalDays = 7
+
 
 exports.registerUser = async function (req,res){
     try {
@@ -42,6 +46,53 @@ exports.login = async function (req, res){
     }
 
     catch (error){
+        return error
+    }
+}
+
+exports.createRental = async function(req, res){
+
+    try{
+        const movie = await Movie.findOne({"slug":req.body.slug})
+        const user = await User.findOne({"email": req.body.email})
+
+        if(!user) return res.status(404).send(`User ${req.body.email} not found.`)
+        if(!movie) return res.status(404).send('Movie not found')
+        if(movie.status === 'out') return res.status(422).send(`${movie.name} is currently out of stock`)
+        
+        const today = new Date()
+        const dueDate = new Date()
+        dueDate.setDate(today.getDate() + rentalDays)
+        const cost = dailyRate*rentalDays
+
+        var rental = {
+            movie: movie,
+            checkOutDate: today,
+            dueDate: dueDate,
+            isLate: false,
+            cost: cost,
+            outstanding: true
+        }
+
+        user.rentals.push(rental)
+        movie.status = 'out'
+        await user.save()
+        await movie.save()
+
+        return res.status(201).send('Rental success')
+    }
+    
+    catch (error){
+        return error
+    }
+}
+
+exports.checkInRental = async function(req, res){
+    try{
+
+    }
+
+    catch(error){
         return error
     }
 }

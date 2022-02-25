@@ -30,6 +30,7 @@ exports.getGenreById = async function (req,res){
 
     try {
         const genre = await Genre.findOne({"_id":req.params.id})
+        
         if(!genre) return res.status(404).send(`Genre with ${req.params.id} not found`)
         return res.status(200).send(genre)
     }

@@ -17,10 +17,9 @@ const UserSchema = new Schema({
         required:[true, 'email required'],
     },
 
-    rentals: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Rental'
-    }],
+    rentals: {
+        type: Array
+    },
 
     accountStatus:{
         type:String,
