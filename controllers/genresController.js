@@ -1,8 +1,6 @@
 const Genre = require('../models/genre')
 const slugify = require('slugify')
 
-
-
 exports.getGenres = async function(req, res){
     try{
         const genres = await Genre.find()
@@ -13,18 +11,6 @@ exports.getGenres = async function(req, res){
         return error
     }
 }
-
-// exports.getGenre = async function  (req,res){
-//     try {
-//         const genre = await Genre.findOne({"slug":req.params.slug})
-//         if(!genre) return res.status(404).send('Genre not found.')
-
-//         return res.status(200).send(genre)
-//     }
-//     catch (error){
-//         return error
-//     }
-// }
 
 exports.getGenreById = async function (req,res){
 
@@ -63,7 +49,6 @@ exports.createGenre = async function (req,res){
 exports.updateGenre = async function (req,res){
     var name = req.params.name
     var newName = req.body.newName
-
 
     try {
         var genre = await Genre.findOne({"name":name})
