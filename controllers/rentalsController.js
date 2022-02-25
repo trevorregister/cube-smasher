@@ -10,8 +10,8 @@ const dailyLateFee = 2
 
 exports.createRental = async function (req, res){
     try {
-        const user = await User.findOne({"_id":req.body.user})
-        const movie = await Movie.findOne({"_id":req.body.movie})
+        var user = await User.findOne({"_id":req.body.user})
+        var movie = await Movie.findOne({"_id":req.body.movie})
 
         if(!user) return res.status(400).send('User not found') //won't engage if input isn't object id. fix in joi validation
         if(!movie) return res.status(400).send('Movie not found') //won't engage if input isn't object id. fix in joi validation
@@ -30,7 +30,7 @@ exports.createRental = async function (req, res){
             cost: dailyRate*rentalDays,
         })
 
-        movie.status = 'out'
+        //movie.status = 'out'
         user.rentals.push(rental._id)
         await movie.save()
         await user.save()
