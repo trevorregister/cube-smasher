@@ -71,7 +71,6 @@ exports.createRental = async function(req, res){
             dueDate: dueDate,
             isLate: false,
             cost: cost,
-            outstanding: true
         }
 
         user.rentals.push(rental)
@@ -89,7 +88,23 @@ exports.createRental = async function(req, res){
 
 exports.checkInRental = async function(req, res){
     try{
+        var movie = await Movie.findOne({"slug":req.body.slug})
+        var user = await User.findOne({"email": req.body.email})
 
+        if(!user) return res.status(404).send(`User ${req.body.email} not found.`)
+        if(!movie) return res.status(404).send(`Movie ${req.body.slug} not found.`)
+
+        for(var index in user.rentals){ //find rental
+            if(user.rentals[index].movie.slug === req.body.slug){
+                user.rentals.splice(index, 1)
+                movie.status = 'in'
+                await user.save()
+                await movie.save()
+                return res.status(200).send(`${movie.name} checked in`)
+            }
+        }
+
+        return res.status(404).send('rental not found')
     }
 
     catch(error){
