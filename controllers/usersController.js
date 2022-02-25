@@ -95,7 +95,7 @@ exports.checkInRental = async function(req, res){
         if(!movie) return res.status(404).send(`Movie ${req.body.slug} not found.`)
 
         for(var index in user.rentals){ //find rental
-            if(user.rentals[index].movie.slug === req.body.slug){
+            if(user.rentals[index].movie.slug === req.body.slug){ //
                 user.rentals.splice(index, 1)
                 movie.status = 'in'
                 await user.save()
