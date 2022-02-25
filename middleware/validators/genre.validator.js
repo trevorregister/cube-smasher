@@ -1,7 +1,5 @@
 const Joi = require('joi')
 const express = require('express')
-const router = express.Router()
-
 
 exports.createGenre = function (req, res, next){ 
     const JoiSchema = Joi.object({
@@ -43,8 +41,3 @@ exports.updateGenre = function (req, res, next){
     next()
 
 }
-
-//const testGenre = {name: "Act??ion", slug:"ac33&tion", createdAt: Date.now()}
-
-//validateGenre(testGenre)
-
