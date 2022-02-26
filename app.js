@@ -10,6 +10,8 @@ const app = express()
 mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 app.use('/', logger.log)
 app.use('/api/genres', genres_routes)
 app.use('/api/movies', movies_routes)

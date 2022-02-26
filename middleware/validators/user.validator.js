@@ -28,6 +28,8 @@ exports.registerUser = function (req, res, next){
 
         role: Joi.string()
         .trim()
+        .min(1)
+        .max(10)
         .required()
     })
 
