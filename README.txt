@@ -16,3 +16,4 @@ To be implemented:
 -production/dev start scripts
 -clean-up endpoints for Vue implementation
 -DELETE endpoints
+-better logging
