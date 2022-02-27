@@ -7,7 +7,7 @@ const dailyRate = 5
 const rentalDays = 7
 
 
-exports.registerUser = async function (req,res){
+exports.newUser = async function (req,res){
     try {
         var user = await User.findOne({"email":req.body.email.toLowerCase()})
         if (user) return res.status(400).send(`User with ${req.body.email} aleady exists`)
@@ -50,7 +50,7 @@ exports.login = async function (req, res){
     }
 }
 
-exports.createRental = async function(req, res){
+exports.checkOut = async function(req, res){
 
     try{
         const movie = await Movie.findOne({"slug":req.body.slug})
@@ -86,7 +86,7 @@ exports.createRental = async function(req, res){
     }
 }
 
-exports.checkInRental = async function(req, res){
+exports.checkIn = async function(req, res){
     try{
         var movie = await Movie.findOne({"slug":req.body.slug})
         var user = await User.findOne({"email": req.body.email})

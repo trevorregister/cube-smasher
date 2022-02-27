@@ -1,7 +1,7 @@
 const Movie = require('../models/movie')
 const slugify = require('slugify')
 
-exports.getMovies = async function (req,res){
+exports.movies = async function (req,res){
     try{
         const movies = await Movie.find()
         res.status(200).send(movies)
@@ -24,7 +24,7 @@ exports.getMovies = async function (req,res){
 //     }
 // }
 
-exports.getMovieById = async function (req,res){
+exports.movie = async function (req,res){
     try {
         const movie = await Movie.findOne({"_id":req.params.id})
         if(!movie) return res.status(400).send(`Movie with ${req.params.id} not found.`)
@@ -36,7 +36,7 @@ exports.getMovieById = async function (req,res){
     }
 }
 
-exports.createMovie = async function (req,res){
+exports.newMovie = async function (req,res){
     try {
         var movie = await Movie.findOne({"name":req.body.name})
         

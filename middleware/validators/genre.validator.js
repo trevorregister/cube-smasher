@@ -1,6 +1,6 @@
 const Joi = require('joi')
 
-exports.createGenre = function (req, res, next){ 
+exports.genre = function (req, res, next){ 
     const JoiSchema = Joi.object({
     
         name: Joi.string()

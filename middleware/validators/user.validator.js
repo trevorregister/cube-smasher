@@ -1,6 +1,6 @@
 const Joi = require('joi')
 
-exports.registerUser = function (req, res, next){
+exports.newUser = function (req, res, next){
 
     const JoiSchema = Joi.object({
         firstName: Joi.string()

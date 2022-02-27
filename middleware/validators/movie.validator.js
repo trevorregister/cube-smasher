@@ -2,7 +2,7 @@ const Joi = require('joi')
 const express = require('express')
 const router = express.Router()
 
-exports.createMovie = function (req, res, next){ 
+exports.newMovie = function (req, res, next){ 
     const JoiSchema = Joi.object({
     
         name: Joi.string()
