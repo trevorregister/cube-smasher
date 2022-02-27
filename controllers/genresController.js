@@ -68,4 +68,15 @@ exports.updateGenre = async function (req,res){
 
 }
 
+exports.deleteGenre = async function(req, res){
+    try {
+        await Genre.deleteOne({"_id":req.params.id}, (error)=>{
+            return res.status(400).send(error.message)
+        })
+    }
+    catch(error){
+        return error
+    }
+}
+
 

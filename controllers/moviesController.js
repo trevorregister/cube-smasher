@@ -61,4 +61,15 @@ exports.newMovie = async function (req,res){
     }
 }
 
+exports.deleteMovie = async function (req,res) {
+    try {
+        await Movie.deleteOne({"_id": req.params.id}, (error)=>{
+            return res.status(404).send(error.message)
+        })
+    }
+    catch (error){
+        return error
+    }
+}
+
 
