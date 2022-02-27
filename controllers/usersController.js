@@ -97,7 +97,7 @@ exports.checkIn = async function(req, res){
 
         for(var index in user.rentals){ //find rental. Can probably optomize with a single query.
             if(user.rentals[index].movie.slug === req.body.slug){
-                user.history.push(user.rentals[index])
+                //user.history.push(user.rentals[index])
                 user.rentals.splice(index, 1)
                 movie.status = 'in'
                 await user.save()

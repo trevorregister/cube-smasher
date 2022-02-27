@@ -12,18 +12,6 @@ exports.movies = async function (req,res){
     } 
 }
 
-// exports.getMovie = async function  (req,res){
-//     try {
-//         const movie = await Movie.findOne({"slug":req.params.slug})
-//         if(!movie) return res.status(400).send('Movie not found.')
-    
-//         return res.status(200).send(movie)
-//     }
-//     catch (error){
-//         return error
-//     }
-// }
-
 exports.movie = async function (req,res){
     try {
         const movie = await Movie.findOne({"_id":req.params.id})
