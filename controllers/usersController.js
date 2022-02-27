@@ -19,6 +19,7 @@ exports.newUser = async function (req,res){
             lastName: req.body.lastName,
             email: req.body.email,
             rentals: [],
+            history: [],
             accountStatus: "active",
             role: req.body.role,
             hash: hash,
@@ -94,8 +95,9 @@ exports.checkIn = async function(req, res){
         if(!user) return res.status(404).send(`User ${req.body.email} not found.`)
         if(!movie) return res.status(404).send(`Movie ${req.body.slug} not found.`)
 
-        for(var index in user.rentals){ //find rental
-            if(user.rentals[index].movie.slug === req.body.slug){ //
+        for(var index in user.rentals){ //find rental. Can probably optomize with a single query.
+            if(user.rentals[index].movie.slug === req.body.slug){
+                user.history.push(user.rentals[index])
                 user.rentals.splice(index, 1)
                 movie.status = 'in'
                 await user.save()
