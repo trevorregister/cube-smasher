@@ -4,11 +4,10 @@ const dotenv = require('dotenv').config()
 const genres_routes = require('./routes/genres')
 const movies_routes = require('./routes/movies')
 const user_routes = require('./routes/users')
-const logger = require('./middleware/logger')
 const morgan = require('morgan')
 
 const app = express()
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, ()=>console.log('Connected to database...'))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
