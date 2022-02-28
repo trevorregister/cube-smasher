@@ -8,12 +8,12 @@ Currently implemented:
 -simple GET, POST, PATCH endpoints for each.
 -Authentication using bcrypt 
 -Validation using joi
+-DELETE endpoints
+-clean-up endpoints for Vue implementation
 
 To be implemented:
 -Role-based authorization using JWT
 -Error handlers
 -Unit testing with Jest
 -production/dev start scripts
--clean-up endpoints for Vue implementation
--DELETE endpoints
 -better logging
