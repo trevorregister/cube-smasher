@@ -13,23 +13,17 @@ const MovieSchema = new Schema({
         unique: true
     },
 
-    createdAt: {
-        type: Date
-    },
+    createdAt: Date,
 
     genres: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genre'
     }],
 
-    history: {
-        type: Array 
-    },
+    history: Array,
 
-    yearReleased: {
-        type: Number
-    },
-
+    yearReleased: Number,
+    
     status: {
         type: String,
         enum: {

@@ -3,7 +3,7 @@ const slugify = require('slugify')
 
 exports.genres = async function(req, res){
     try{
-        const genres = await Genre.find()
+        const genres = await Genre.find().sort('name')
         res.status(200).send(genres)
         return genres
     }
@@ -15,7 +15,7 @@ exports.genres = async function(req, res){
 exports.genre = async function (req,res){
 
     try {
-        const genre = await Genre.findOne({"_id":req.params.id})
+        var genre = await Genre.findOne({"_id":req.params.id})
         
         if(!genre) return res.status(404).send(`Genre with ${req.params.id} not found`)
         return res.status(200).send(genre)
@@ -29,16 +29,16 @@ exports.genre = async function (req,res){
 exports.newGenre = async function (req,res){
     try {
         var genre = await Genre.findOne({"name":req.body.name})
-
         if(genre) return res.status(404).send('Genre already exists')
+
         var genre = new Genre({
             name: req.body.name,
             slug: slugify(req.body.name.toLowerCase()),
             createdAt: Date.now()
         })
 
-        await genre.save()
-        return res.status(201).send(`Genre with name ${genre.name} created.`)
+       genre = await genre.save()
+       return res.status(201).send(genre)
     }
     catch (error){
         return error
@@ -47,20 +47,20 @@ exports.newGenre = async function (req,res){
 }
 
 exports.updateGenre = async function (req,res){
-    var name = req.params.id
-    var newName = req.body.newName
+    var genreId = req.params.id
+    var newName = req.body.name
 
     try {
-        var genre = await Genre.findOne({"name":name})
-        if(!genre) return res.status(404).send(` ${name} does not exist`)
+        var genre = await Genre.findOne({"_id":genreId})
+        if(!genre) return res.status(404).send(` ${genreId} does not exist`)
 
         var newNameCheck = await Genre.findOne({"name":newName})
         if (newNameCheck) return res.status(403).send(`${newName} already exists`)
 
         genre.name = newName
         genre.slug = slugify(newName.toLowerCase())
-        await genre.save()
-        return res.status(201).send(`${name} changed to ${newName}`)
+        genre = await genre.save()
+        return res.status(201).send(genre)
     }
     catch(error){
         return error

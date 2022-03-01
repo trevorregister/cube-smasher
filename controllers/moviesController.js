@@ -3,9 +3,10 @@ const slugify = require('slugify')
 
 exports.movies = async function (req,res){
     try{
-        const movies = await Movie.find()
-        res.status(200).send(movies)
-        return movies
+        var movies = await Movie.find()
+        .sort('name')
+        .populate('genres', ['name', 'slug'])
+        return res.status(200).send(movies)
     }
     catch (error){
         return error
@@ -40,8 +41,8 @@ exports.newMovie = async function (req,res){
             yearReleased:req.body.yearReleased 
         })
 
-        await movie.save()
-        return res.status(201).send(`Movie ${movie} succesfully created.`)
+        movie = movie.save()
+        return res.status(201).send(movie)
     }
 
     catch (error){

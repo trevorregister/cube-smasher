@@ -13,10 +13,7 @@ const GenreSchema = new Schema({
         required: true,
         unique: true
     },
-
-    createdAt: {
-        type: Date
-    }
+    createdAt: Date
 })
 
 

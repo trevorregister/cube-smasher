@@ -1,7 +1,6 @@
 const User = require('../models/user')
 const Movie = require('../models/movie')
 const bcrypt = require('bcryptjs')
-
 const saltRounds = 10
 const dailyRate = 5
 const rentalDays = 7
@@ -27,7 +26,7 @@ exports.newUser = async function (req,res){
             updatedAt: Date.now()
         })
 
-        await user.save()
+        user = await user.save()
         return res.status(201).send('User successfully created')
     }
     catch (error){
@@ -40,10 +39,11 @@ exports.login = async function (req, res){
         const user = await User.findOne({"email":req.body.email.toLowerCase()})
 
         if(user && await bcrypt.compare(req.body.password, user.hash)){
-            return res.status(200).send('Login successful') //for authorization, remove return and add next() to auth route instead 
+            const token = user.generateAuthToken()
+            res.status(200).header('x-auth-token', token).send(user)
         }
-        
-        else return res.status(401).send('Email or password incorrect')
+
+        else return res.status(401).send('Username or password incorrect')
     }
 
     catch (error){
@@ -112,4 +112,9 @@ exports.checkIn = async function(req, res){
     catch(error){
         return error
     }
+}
+
+exports.currentUser = async function (req, res) {
+    var user = await User.find({"_id":req.user._id}).select('-hash')
+    res.send(user)
 }

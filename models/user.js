@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const jwt = require('jsonwebtoken')
 
 const UserSchema = new Schema({
     firstName: {
@@ -17,9 +18,7 @@ const UserSchema = new Schema({
         required:[true, 'email required'],
     },
 
-    rentals: {
-        type: Array
-    },
+    rentals: Array,
 
     accountStatus:{
         type:String,
@@ -44,18 +43,17 @@ const UserSchema = new Schema({
         required: [true, 'Password required']
     },
 
-    token: {
-        type: String
-    },
+    token: String,
 
-    createdAt: {
-        type: Date
-    },
+    createdAt: Date,
 
-    updatedAt:{
-        type: Date
-    }
+    updatedAt: Date
 })
+
+UserSchema.methods.generateAuthToken = function() {
+    const token = jwt.sign({_id:this._id, role:this.role}, process.env.JWT_SECRET)
+    return token
+}
 
 
 var User = mongoose.model('User', UserSchema)

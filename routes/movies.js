@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 const moviesController = require('../controllers/moviesController')
 const movieValidator = require('../middleware/validators/movie.validator')
+const auth = require('../middleware/auth')
 
 router.get('/', moviesController.movies)
 router.get('/:id', moviesController.movie)
-router.post('/', movieValidator.newMovie, moviesController.newMovie)
-router.delete('/:id', moviesController.deleteMovie)
+router.post('/', auth.auth, auth.role, movieValidator.newMovie, moviesController.newMovie)
+router.delete('/:id', auth.auth, auth.role, moviesController.deleteMovie)
 
 module.exports = router
