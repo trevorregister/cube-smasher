@@ -6,7 +6,7 @@ const auth = require('../middleware/auth')
 
 router.get('/', moviesController.movies)
 router.get('/:id', moviesController.movie)
-router.post('/', auth.auth, auth.role, movieValidator.newMovie, moviesController.newMovie)
-router.delete('/:id', auth.auth, auth.role, moviesController.deleteMovie)
+router.post('/', auth.auth, auth.adminRole, movieValidator.newMovie, moviesController.newMovie)
+router.delete('/:id', auth.auth, auth.superAdminRole, moviesController.deleteMovie)
 
 module.exports = router
