@@ -34,6 +34,16 @@ exports.newUser = async function (req,res){
     }
 }
 
+exports.users = async function(req, res){
+    try {
+        const users = await User.find({})
+        return res.status(200).send(users)
+    }
+    catch (error){
+        return error
+    }
+}
+
 exports.login = async function (req, res){
     try {
         const user = await User.findOne({"email":req.body.email.toLowerCase()})
