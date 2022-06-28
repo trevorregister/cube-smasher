@@ -6,6 +6,7 @@ const auth = require('../middleware/auth')
 
 router.get('/me', auth.auth, usersController.currentUser)
 router.get('/', auth.auth, usersController.users)
+router.patch('/:id', auth.auth)
 router.post('/register', userValidator.newUser, usersController.newUser)
 router.post('/login', usersController.login)
 router.post('/rental', auth.auth, usersController.checkOut)
