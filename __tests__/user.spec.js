@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 
 describe('Register new user', ()=>{
-    testUser = {
+    let testUser = {
         firstName: "first", 
         lastName:"last", 
         email:"test@test.com", 

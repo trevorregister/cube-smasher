@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGO_TEST, ()=>console.log('Connected to database...'))
 
 describe('Create new genre', ()=>{
-    testGenre = {name:"test12 3"}
+    let testGenre = {name:"test12 3"}
 
     test('write new genre to db', ()=>{
 
