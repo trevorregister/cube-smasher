@@ -1,6 +1,5 @@
-Working on creating an MVC for a video rental service, just the backend for now in node, express, and mongoose. Vue3 front end afterwards.
+First attempt at a simple CRUD operations backend for a fictional video rental service.
 
-Currently implemented:
 -User schema and controllers
 -Genre schema and controllers
 -Movie schema and controllers
@@ -9,9 +8,3 @@ Currently implemented:
 -Authentication using bcrypt
 -Role-based authorization using JWT 
 -Validation using joi
--clean-up endpoints for Vue implementation
-
-To be implemented:
--Error handlers
--Unit testing with Jest
--production/dev start scripts
